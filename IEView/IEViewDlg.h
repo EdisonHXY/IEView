@@ -41,4 +41,6 @@ protected:
 	DECLARE_DHTML_EVENT_MAP()
 public:
 	virtual void OnDocumentComplete(LPDISPATCH pDisp, LPCTSTR szUrl);
+	virtual BOOL PreTranslateMessage(MSG* pMsg);
+	virtual void OnOK();
 };

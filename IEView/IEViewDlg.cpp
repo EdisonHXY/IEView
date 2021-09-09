@@ -103,7 +103,11 @@ BOOL CIEViewDlg::CallJScript(const CString strFunc, const CStringArray& paramArr
 
 BOOL CIEViewDlg::OnInitDialog()
 {
+	//滚动条
 	SetHostFlags(DOCHOSTUIFLAG_FLAT_SCROLLBAR | DOCHOSTUIFLAG_NO3DBORDER);
+	//取消任务栏的图标
+	ModifyStyleEx(WS_EX_APPWINDOW, WS_EX_TOOLWINDOW);
+	
 	CDHtmlDialog::OnInitDialog();
 
 	// 将“关于...”菜单项添加到系统菜单中。
@@ -130,7 +134,7 @@ BOOL CIEViewDlg::OnInitDialog()
 	//  执行此操作
 	SetIcon(m_hIcon, TRUE);			// 设置大图标
 	SetIcon(m_hIcon, FALSE);		// 设置小图标
-
+	
 	// TODO: 在此添加额外的初始化代码
 	int cx = GetSystemMetrics(SM_CXSCREEN);
 	int cy = GetSystemMetrics(SM_CYSCREEN);
@@ -281,4 +285,24 @@ void CIEViewDlg::OnDocumentComplete(LPDISPATCH pDisp, LPCTSTR szUrl)
 
 	// TODO: 在此添加专用代码和/或调用基类
 	
+}
+
+
+BOOL CIEViewDlg::PreTranslateMessage(MSG* pMsg)
+{
+	// TODO: 在此添加专用代码和/或调用基类
+// 	if (pMsg->message == WM_KEYDOWN && pMsg->wParam == VK_RETURN)
+// 		return TRUE;
+	if (pMsg->message == WM_KEYDOWN && pMsg->wParam == VK_ESCAPE)
+		return TRUE;
+	//return CDialogEx::PreTranslateMessage(pMsg);
+	return CDHtmlDialog::PreTranslateMessage(pMsg);
+}
+
+
+void CIEViewDlg::OnOK()
+{
+	// TODO: 在此添加专用代码和/或调用基类
+
+	//CDHtmlDialog::OnOK();
 }
